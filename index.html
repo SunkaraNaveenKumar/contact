@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact manager</title>
+</head>
+<body>
+    <h1 style="color: aqua;background-color: black; display: inline;">Contact Manager </h1> <br> <br>
+   <input type="text" name="username" id="search" placeholder="search by name or mobile"><br>
+    <h3>My contacts- <span id="title">0</span></h3>
+    <ul id="list">
+
+
+    </ul>
+    <!--///////////////////////////-->
+    <script>
+const contacts =[
+    {name:'john',mobile:'9441314141'},
+    {name:'rose',mobile:'9441820805'},
+    {name:'naveen',mobile:'8217277836'}
+]
+const searchHandle  = document.getElementById('search')
+const titleHandle =  document.getElementById('title')
+const listHandle = document.querySelector('#list')
+titleHandle.textContent = contacts.length
+function limaker(arr){
+    arr.forEach(ele=>{
+    const liHandle = document.createElement('li')
+    liHandle.textContent = `${ele.name}-${ele.mobile}`
+   listHandle.appendChild(liHandle)
+})
+}
+limaker(contacts)
+////////////////////////////   when a event is fired exicute the below event
+searchHandle.addEventListener('keyup',function(e){
+    console.log(e.target.value)
+    listHandle.innerHTML = ''
+    
+    const inputText = e.target.value
+    const result = contacts.filter(ele=>{
+        return ele.name.toLowerCase(). includes(inputText.toLowerCase()) || ele.mobile.includes(inputText) })
+   
+        titleHandle.innerHTML = result.length
+
+limaker(result)
+})
+    </script>
+</body>
+</html>
